@@ -1,0 +1,66 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 import tkinter as tk\
+import random\
+\
+# List of Thai consonants with their names\
+thai_consonants = [\
+    ("\uc0\u3585 ", "gor kai (\u3652 \u3585 \u3656 )"),\
+    ("\uc0\u3586 ", "kho khai (\u3652 \u3586 \u3656 )"),\
+    ("\uc0\u3588 ", "kho khwai (\u3588 \u3623 \u3634 \u3618 )"),\
+    ("\uc0\u3591 ", "ngo ngu (\u3591 \u3641 )"),\
+    ("\uc0\u3592 ", "cho chan (\u3592 \u3634 \u3609 )"),\
+    ("\uc0\u3594 ", "cho chang (\u3594 \u3657 \u3634 \u3591 )"),\
+    ("\uc0\u3604 ", "do dek (\u3648 \u3604 \u3655 \u3585 )"),\
+    ("\uc0\u3605 ", "to tao (\u3648 \u3605 \u3656 \u3634 )"),\
+    ("\uc0\u3610 ", "bo baimai (\u3651 \u3610 \u3652 \u3617 \u3657 )"),\
+    ("\uc0\u3611 ", "po pla (\u3611 \u3621 \u3634 )")\
+]\
+\
+class FlashcardApp:\
+    def __init__(self, root):\
+        self.root = root\
+        self.root.title("Thai Consonant Flashcards")\
+        \
+        self.current_card = None\
+        self.flipped = False\
+        \
+        self.card_label = tk.Label(root, text="", font=("Arial", 50), width=10, height=3, relief="ridge")\
+        self.card_label.pack(pady=20)\
+        \
+        self.flip_button = tk.Button(root, text="Flip", command=self.flip_card)\
+        self.flip_button.pack()\
+        \
+        self.next_button = tk.Button(root, text="Next", command=self.next_card)\
+        self.next_button.pack()\
+        \
+        self.next_card()\
+        \
+    def next_card(self):\
+        """Show the next random consonant"""\
+        self.current_card = random.choice(thai_consonants)\
+        self.flipped = False\
+        self.update_card()\
+        \
+    def flip_card(self):\
+        """Flip the card to show the consonant's name"""\
+        self.flipped = not self.flipped\
+        self.update_card()\
+        \
+    def update_card(self):\
+        """Update the card display"""\
+        if self.flipped:\
+            self.card_label.config(text=self.current_card[1], font=("Arial", 20))\
+        else:\
+            self.card_label.config(text=self.current_card[0], font=("Arial", 50))\
+\
+if __name__ == "__main__":\
+    root = tk.Tk()\
+    app = FlashcardApp(root)\
+    root.mainloop()\
+}
